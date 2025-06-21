@@ -55,7 +55,7 @@ public class DemoApplication {
 
             @Override
             public Optional<Item> findById(Long aLong) {
-                return Optional.empty();
+                return store.get(aLong) != null ? Optional.of(store.get(aLong)) : Optional.empty();
             }
 
             @Override
@@ -197,6 +197,8 @@ public class DemoApplication {
 
         System.out.println("num items in repository: " + items.size());
         System.out.println("item name is:" + items.get(0).getName());
+        System.out.println(("item id: " + items.get(0).getId()));
+        System.out.println("first item id " + items.getFirst().getId());
     }
 
 
