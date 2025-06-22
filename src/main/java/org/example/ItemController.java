@@ -1,5 +1,6 @@
 package org.example;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -23,8 +24,10 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public Item get(@PathVariable Long id) {
-        return repository.findById(id).orElseThrow();
+    public ResponseEntity<Item> get(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
